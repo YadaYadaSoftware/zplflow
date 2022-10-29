@@ -4,7 +4,13 @@ namespace YadaYada.ZplFlow;
 
 public class Document
 {
-    private readonly StringBuilder _contents = new(Codes.FileStart);
+    public StringBuilder Contents { get; } = new();
+
+    public Document()
+    {
+        this.Contents.AppendLine(Codes.FileStart);
+    }
+
     public void AddText(string text)
     {
         throw new NotImplementedException();
@@ -12,12 +18,9 @@ public class Document
 
     public string GetZpl()
     {
-        return _contents.ToString();
+        if (!Contents.ToString().EndsWith(Codes.FileEnd)) Contents.AppendLine(Codes.FileEnd);
+        return Contents.ToString();
     }
-}
 
-public static class Codes
-{
-    public const string FileStart = "^XA";
-    public const string FileEnd = "^XZ";
+    
 }

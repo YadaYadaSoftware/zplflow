@@ -11,6 +11,7 @@ namespace ZplFlow.Tests
         {
             var t = new Document();
             t.GetZpl().Should().StartWith(Codes.FileStart);
+            t.GetZpl().ReplaceLineEndings(string.Empty).Should().EndWith(Codes.FileEnd);
 
         }
     }
