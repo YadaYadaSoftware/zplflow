@@ -2,7 +2,7 @@
 
 public class FileStart : Fragment
 {
-    public override string GetZpl(List<Fragment> fragments)
+    public override string GetZpl(Document document)
     {
         return Codes.FileStart;
     }

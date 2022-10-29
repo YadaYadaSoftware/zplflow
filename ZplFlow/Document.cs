@@ -14,9 +14,10 @@ public class Document
         this.Contents.AppendLine(Codes.FileStart);
     }
 
+
     public void AddLine(string text)
     {
-        _fragments.Add(new TextLine(text));
+        _fragments.Add(new FieldData(text));
         //if (!this.Contents.ToString().Contains(Codes.FieldOrigin))
         //{
         //    this.Contents.AppendLine($"{Codes.FieldOrigin}{_x},{_y}");
@@ -40,7 +41,7 @@ public class Document
             {
                 returnValue.AppendLine($"{Codes.FieldOrigin}{_x},{_y}");
             }
-            returnValue.Append(fragment.GetZpl(new List<Fragment>()));
+            returnValue.Append(fragment.GetZpl(this));
         }
         return returnValue.ToString();
     }

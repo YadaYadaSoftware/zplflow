@@ -2,15 +2,15 @@
 
 namespace YadaYada.ZplFlow;
 
-public class TextLine : Fragment
+public class FieldData : Fragment
 {
-    public TextLine(string text) : base(true, supportsHeight: true)
+    public FieldData(string text) : base(true, supportsHeight: true)
     {
         this.Text = text;
     }
 
     public string Text { get; }
-    public override string GetZpl(List<Fragment> fragments)
+    public override string GetZpl(Document document)
     {
         var zpl = new StringBuilder();
         zpl.AppendLine($"{Codes.ScalableBitmappedFont}0,0,30");
@@ -18,5 +18,7 @@ public class TextLine : Fragment
         return zpl.ToString();
     }
 
-    public override int? Height { get; } = 20;
+    
+
 }
+

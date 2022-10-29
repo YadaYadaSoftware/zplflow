@@ -12,9 +12,9 @@ public abstract class Fragment
     {
         
     }
-    public abstract string GetZpl(List<Fragment> fragments);
+    public abstract string GetZpl(Document document);
     public bool SupportsOrigin { get; }
     public bool SupportsHeight { get; }
 
-    public virtual int? Height { get; } = null;
+    public virtual int? Height { get; init; } = null;
 }
