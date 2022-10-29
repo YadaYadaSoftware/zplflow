@@ -14,12 +14,11 @@ public class FieldData : Fragment
 
     public string Text { get; }
 
-    public override string GetZpl(Document document)
+    public override string GetZpl(Document document, bool withComments)
     {
         var zpl = new StringBuilder();
-        zpl.AppendLine($"{Codes.FieldData}{Text}");
+        zpl.AppendLine($"{Codes.FieldDataStart}{Text}{Codes.FieldDataEnd}");
         return zpl.ToString();
     }
 
 }
-

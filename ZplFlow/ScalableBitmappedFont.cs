@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using System.Text;
 
 namespace YadaYada.ZplFlow;
 
@@ -12,16 +13,23 @@ public interface IScalableBitmappedFont
 
 public class ScalableBitmappedFont : Fragment, IScalableBitmappedFont
 {
-    public ScalableBitmappedFont(string font = "0", int fragmentWidth = 0, int fragmentHeight = 0, Orientation orientation = Orientation.Normal)
+    public ScalableBitmappedFont(string font = "M", int fragmentWidth = 10, int fragmentHeight = 10, Orientation orientation = Orientation.Normal)
     {
         this.Font = font;
         this.FontWidth = fragmentWidth;
         this.FontHeight = fragmentHeight;
         this.Orientation = orientation;
     }
-    public override string GetZpl(Document document)
+    public override string GetZpl(Document document, bool withComments = false)
     {
-        return $"{Codes.ScalableBitmappedFont}{this.Font}{this.Orientation.GetEnumMemberValue()},{this.FontHeight},{this.FontWidth}";
+        var zpl = new StringBuilder();
+        if (withComments)
+        {
+            zpl.AppendLine($"{Codes.CommentStart} --- Set Font: {nameof(Font)}='{this.Font}, {nameof(Orientation)}='{this.Orientation}', {nameof(FontHeight)}='{this.FontHeight}', {nameof(FontWidth)}='{this.FontWidth}' --- {Codes.CommentEnd}");
+        }
+        zpl.Append($"{Codes.ScalableBitmappedFont}{this.Font}{this.Orientation.GetEnumMemberValue()},{this.FontHeight},{this.FontWidth}");
+        zpl.AppendLine();
+        return zpl.ToString();
     }
     public string Font { get; set; }
     public int? FontWidth { get; set; }

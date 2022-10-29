@@ -1,4 +1,6 @@
-﻿namespace YadaYada.ZplFlow;
+﻿using System.Text;
+
+namespace YadaYada.ZplFlow;
 
 public class Origin : Fragment
 {
@@ -24,8 +26,15 @@ public class Origin : Fragment
     public int X { get; set; }
     public int Y { get; set; }
     public JustificationEnum Justification { get; set; }
-    public override string GetZpl(Document document)
+    public override string GetZpl(Document document, bool withComments = false)
     {
-        return $"{Codes.FieldOrigin}{X},{Y},{Justification}";
+        var zpl = new StringBuilder();
+        if (withComments)
+        {
+            zpl.AppendLine($"{Codes.CommentStart} --- Origin {nameof(X)}='{X}', {nameof(Y)}='{Y}', {nameof(Justification)}='{Justification}' --- {Codes.CommentEnd}");
+        }
+        zpl.AppendLine($"{Codes.FieldOrigin}{X},{Y},{(int)Justification}");
+        return zpl.ToString();
+
     }
 }
