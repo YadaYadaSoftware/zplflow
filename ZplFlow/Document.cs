@@ -12,8 +12,9 @@ public class Document
 
     public Document AddLine(string text, int heightInDots = 30)
     {
-        if (this.Fragments.LastOrDefault(f => f is ScalableBitmappedFont) is not { })
+        if (this.Fragments.OfType<ScalableBitmappedFont>().LastOrDefault() is not { } lastFont || lastFont.FontHeight != heightInDots)
         {
+            
             this.Fragments.Add(new ScalableBitmappedFont { FontHeight = heightInDots });
         }
         

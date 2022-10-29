@@ -6,6 +6,14 @@ public class Origin : Fragment
     {
         
     }
+
+    public Origin(int x, int y, JustificationEnum justification)
+    {
+        X = x;
+        Y = y;
+        Justification = justification;
+    }
+
     public enum JustificationEnum
     {
         Left,
