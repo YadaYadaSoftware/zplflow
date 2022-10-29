@@ -21,5 +21,25 @@ namespace ZplFlow.Tests
             zpl.Should().Contain(Codes.ScalableBitmappedFont);
             zpl.Should().Contain(Codes.FieldData);
         }
+
+        [Fact]
+        public void FontTest()
+        {
+            const string fontName = "2";
+            const int height = 101;
+            const int width = 200;
+
+            var t = new FieldData("this is my text");
+            t.Font = fontName;
+            t.FontHeight = height;
+            t.FontHeight.Should().Be(height);
+            t.FontWidth = width;
+            t.FontWidth.Should().Be(width);
+
+            var zpl = t.GetZpl(new Document());
+            var lines = zpl.Split(Environment.NewLine);
+            lines.First().Should().Be($"{Codes.ScalableBitmappedFont}{fontName}{Orientation.Normal.GetEnumMemberValue()},{height},{width}");
+
+        }
     }
 }

@@ -16,5 +16,7 @@ public abstract class Fragment
     public bool SupportsOrigin { get; }
     public bool SupportsHeight { get; }
 
-    public virtual int? Height { get; init; } = null;
+    public int? FragmentHeight { get; set; } = null;
+    public int? FragmentWidth { get; set; } = null;
+    
 }
