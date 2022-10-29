@@ -7,19 +7,30 @@ public class Document
 {
     private int _x = 0;
     private int _y = 0;
-    public List<Fragment> Fragments { get; } = new() {new FileStart()};
+    public LinkedList<Fragment> Fragments { get; } = new();
 
+    public Document()
+    {
+        this.Fragments.AddFirst(new FileStart());
+        this.Fragments.AddLast(new FileEnd());
+    }
+
+
+    private Fragment AddBeforeFileEnd(Fragment fragment)
+    {
+        this.Fragments.AddBefore(this.Fragments.Last!, new LinkedListNode<Fragment>(fragment));
+        return fragment;
+    }
 
     public Document AddLine(string text, int heightInDots = 30)
     {
         if (this.Fragments.OfType<ScalableBitmappedFont>().LastOrDefault() is not { } lastFont || lastFont.FontHeight != heightInDots)
         {
-            
-            this.Fragments.Add(new ScalableBitmappedFont { FontHeight = heightInDots });
+            this.AddBeforeFileEnd(new ScalableBitmappedFont { FontHeight = heightInDots });
         }
         
         var fieldData = new FieldData(text);
-        Fragments.Add(fieldData);
+        this.AddBeforeFileEnd(fieldData);
         return this;
     }
 
@@ -27,10 +38,6 @@ public class Document
 
     public string GetZpl()
     {
-        if (Fragments.Last() is not FileEnd)
-        {
-            Fragments.Add(new FileEnd());
-        }
         var returnValue = new StringBuilder();
         foreach (var fragment in Fragments)
         {
