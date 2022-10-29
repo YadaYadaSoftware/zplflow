@@ -12,6 +12,16 @@ namespace ZplFlow.Tests
             var t = new Document();
             t.GetZpl().Should().StartWith(Codes.FileStart);
             t.GetZpl().ReplaceLineEndings(string.Empty).Should().EndWith(Codes.FileEnd);
+        }
+
+        [Fact]
+        public void AddTextTest()
+        {
+            var t = new Document();
+            var thisIsMyText = "this is my text";
+            t.AddText(thisIsMyText);
+            var zpl = t.GetZpl();
+            zpl.Should().Contain($"{Codes.FieldData}{thisIsMyText}");
 
         }
     }

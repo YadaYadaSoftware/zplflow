@@ -5,6 +5,7 @@ namespace YadaYada.ZplFlow;
 public class Document
 {
     public StringBuilder Contents { get; } = new();
+    
 
     public Document()
     {
@@ -13,8 +14,11 @@ public class Document
 
     public void AddText(string text)
     {
-        throw new NotImplementedException();
+        this.Contents.Append(Codes.FieldData);
+        this.Contents.AppendLine(text);
     }
+
+    public int Y { get; set; }
 
     public string GetZpl()
     {
