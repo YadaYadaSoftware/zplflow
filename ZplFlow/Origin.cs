@@ -26,13 +26,9 @@ public record Origin : Fragment
     public int X { get; set; }
     public int Y { get; set; }
     public JustificationEnum Justification { get; set; }
-    public override string GetZpl(Document document, bool withComments = false)
+    public override string GetZpl(Document document)
     {
         var zpl = new StringBuilder();
-        if (withComments)
-        {
-            zpl.AppendLine($"{Codes.CommentStart} --- Origin {nameof(X)}='{X}', {nameof(Y)}='{Y}', {nameof(Justification)}='{Justification}' --- {Codes.CommentEnd}");
-        }
         zpl.Append($"{Codes.FieldOrigin}{X},{Y},{(int)Justification}");
         return zpl.ToString();
 

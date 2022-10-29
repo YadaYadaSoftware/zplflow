@@ -41,11 +41,11 @@ public class Document
 
         this.AddBeforeFileEnd(origin);
 
-        //if (this.Fragments.OfType<ScalableBitmappedFont>().LastOrDefault() is not { } lastFont || lastFont.FontHeight != heightInDots)
-        //{
-        //    this.AddBeforeFileEnd(new ScalableBitmappedFont { FontHeight = heightInDots });
-        //}
-        
+        if (this.Fragments.OfType<ScalableBitmappedFont>().LastOrDefault() is not { } lastFont || lastFont.FontHeight != heightInDots)
+        {
+            this.AddBeforeFileEnd(new ScalableBitmappedFont(this.GetCurrentFont().Font.Value, Orientation.Normal));
+        }
+
         var fieldData = new FieldData(text){FragmentHeight = heightInDots};
         this.AddBeforeFileEnd(fieldData);
         return this;
@@ -72,7 +72,7 @@ public class Document
         var returnValue = new StringBuilder();
         foreach (var fragment in Fragments)
         {
-            returnValue.AppendLine(fragment.GetZpl(this, withComments));
+            returnValue.AppendLine(fragment.GetZpl(this));
         }
         return returnValue.ToString();
     }

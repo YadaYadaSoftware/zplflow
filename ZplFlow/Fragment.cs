@@ -10,7 +10,7 @@ public abstract record Fragment
     {
         
     }
-    public abstract string GetZpl(Document document, bool withComments = false);
+    public abstract string GetZpl(Document document);
 
     public int? FragmentHeight { get; set; } = null;
     public int? FragmentWidth { get; set; } = null;

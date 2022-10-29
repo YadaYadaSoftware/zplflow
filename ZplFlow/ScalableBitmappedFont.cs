@@ -5,7 +5,7 @@ namespace YadaYada.ZplFlow;
 
 public interface IScalableBitmappedFont
 {
-    string Font { get; set; }
+    char Font { get; set; }
     int? FontWidth { get; set; }
     Orientation Orientation { get; set; }
     int? FontHeight { get; set; }
@@ -13,24 +13,30 @@ public interface IScalableBitmappedFont
 
 public record ScalableBitmappedFont : Fragment, IScalableBitmappedFont
 {
-    public ScalableBitmappedFont(string font = "M", int fragmentWidth = 10, int fragmentHeight = 10, Orientation orientation = Orientation.Normal)
+    public ScalableBitmappedFont(char font, Orientation orientation, int? fragmentWidth = null, int? fragmentHeight = null)
     {
-        this.Font = font;
-        this.FontWidth = fragmentWidth;
-        this.FontHeight = fragmentHeight;
-        this.Orientation = orientation;
+        Font = font;
+        Orientation = orientation;
+        FragmentWidth = fragmentWidth;
+        FragmentHeight = fragmentHeight;
     }
-    public override string GetZpl(Document document, bool withComments = false)
+    public override string GetZpl(Document document)
     {
         var zpl = new StringBuilder();
-        if (withComments)
+        zpl.Append($"{Codes.ScalableBitmappedFont}{this.Font}{this.Orientation.GetEnumMemberValue()},");
+        if (this.FontHeight.HasValue)
         {
-            zpl.AppendLine($"{Codes.CommentStart} --- Set Font: {nameof(Font)}='{this.Font}, {nameof(Orientation)}='{this.Orientation}', {nameof(FontHeight)}='{this.FontHeight}', {nameof(FontWidth)}='{this.FontWidth}' --- {Codes.CommentEnd}");
+            zpl.Append(this.FontHeight.Value);
         }
-        zpl.Append($"{Codes.ScalableBitmappedFont}{this.Font}{this.Orientation.GetEnumMemberValue()},{this.FontHeight},{this.FontWidth}");
+        zpl.Append(",");
+        if (this.FontWidth.HasValue)
+        {
+            zpl.Append(this.FontWidth.Value);
+        }
+        
         return zpl.ToString();
     }
-    public string Font { get; set; }
+    public char Font { get; set; }
     public int? FontWidth { get; set; }
     public Orientation Orientation { get; set; }
     public int? FontHeight { get; set; }
