@@ -4,7 +4,7 @@ namespace YadaYada.ZplFlow;
 
 public class FieldData : Fragment, IScalableBitmappedFont
 {
-    public FieldData(string text) : base(true, supportsHeight: true)
+    public FieldData(string text) : base(true)
     {
         this.Text = text;
         this.TextFont = new ScalableBitmappedFont();
