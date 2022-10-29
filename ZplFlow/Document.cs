@@ -5,7 +5,9 @@ namespace YadaYada.ZplFlow;
 public class Document
 {
     public StringBuilder Contents { get; } = new();
-    
+    private int _x = 0;
+    private int _y = 0;
+
 
     public Document()
     {
@@ -14,6 +16,10 @@ public class Document
 
     public void AddText(string text)
     {
+        if (!this.Contents.ToString().Contains(Codes.FieldOrigin))
+        {
+            this.Contents.AppendLine($"{Codes.FieldOrigin}{_x},{_y}");
+        }
         this.Contents.Append(Codes.FieldData);
         this.Contents.AppendLine(text);
     }

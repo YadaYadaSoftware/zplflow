@@ -21,6 +21,7 @@ namespace ZplFlow.Tests
             var thisIsMyText = "this is my text";
             t.AddText(thisIsMyText);
             var zpl = t.GetZpl();
+            zpl.Should().Contain($"{Codes.FieldOrigin}0,0");
             zpl.Should().Contain($"{Codes.FieldData}{thisIsMyText}");
 
         }
