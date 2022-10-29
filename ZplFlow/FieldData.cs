@@ -17,7 +17,7 @@ public record FieldData : Fragment
     public override string GetZpl(Document document)
     {
         var zpl = new StringBuilder();
-        zpl.AppendLine($"{Codes.FieldDataStart}{Text}{Codes.FieldDataEnd}");
+        zpl.Append($"{Codes.FieldDataStart}{Text}{Codes.FieldDataEnd}");
         return zpl.ToString();
     }
 

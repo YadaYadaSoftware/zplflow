@@ -43,7 +43,11 @@ public class Document
 
         if (this.Fragments.OfType<ScalableBitmappedFont>().LastOrDefault() is not { } lastFont || lastFont.FontHeight != heightInDots)
         {
-            this.AddBeforeFileEnd(new ScalableBitmappedFont(this.GetCurrentFont().Font.Value, Orientation.Normal));
+            var currentFont = this.GetCurrentFont();
+            if (currentFont != null)
+            {
+                this.AddBeforeFileEnd(new ScalableBitmappedFont(currentFont.Font.Value, Orientation.Normal, fragmentHeight: heightInDots));
+            }
         }
 
         var fieldData = new FieldData(text){FragmentHeight = heightInDots};

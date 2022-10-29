@@ -17,8 +17,8 @@ public record ScalableBitmappedFont : Fragment, IScalableBitmappedFont
     {
         Font = font;
         Orientation = orientation;
-        FragmentWidth = fragmentWidth;
-        FragmentHeight = fragmentHeight;
+        FontWidth = FragmentWidth = fragmentWidth;
+        FontHeight = FragmentHeight = fragmentHeight;
     }
     public override string GetZpl(Document document)
     {

@@ -30,7 +30,7 @@ namespace ZplFlow.Tests
         public void SamplePackingSlip()
         {
             var t = new Document(new Size(4*203,6*203));
-            t.SetDefaultFont('C', heightInDots: 40)
+            t.SetDefaultFont('F', heightInDots: 40)
                 .AddLine("John Doe", 100)
                 .AddLine("123 Main St.",40);
                 t.AddLine("Town, ST 12345", 40);
