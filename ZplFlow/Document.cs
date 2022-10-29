@@ -7,6 +7,7 @@ namespace YadaYada.ZplFlow;
 public class Document
 {
     public Size Size { get; }
+    public int Padding { get; }
     private int _y = 0;
     public LinkedList<Fragment> Fragments { get; } = new();
 
@@ -16,9 +17,10 @@ public class Document
         this.Fragments.AddLast(new FileEnd());
     }
 
-    public Document(Size size) : this()
+    public Document(Size size, int padding = 20 ) : this()
     {
         Size = size;
+        Padding = padding;
     }
 
 
@@ -35,7 +37,7 @@ public class Document
     public Document AddLine(string text, int heightInDots = 30)
     {
 
-        var origin = new Origin(0, _y, Origin.JustificationEnum.Left);
+        var origin = new Origin(this.Padding, _y, Origin.JustificationEnum.Left);
 
         this.AddBeforeFileEnd(origin);
 

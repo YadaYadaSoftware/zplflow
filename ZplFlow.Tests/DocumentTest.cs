@@ -18,7 +18,7 @@ namespace ZplFlow.Tests
         [Fact]
         public void AddTextTest()
         {
-            var t = new Document(new Size(4 * 203, 6 * 203));
+            var t = new Document(new Size(4 * 203, 6 * 203), padding: 20);
             var thisIsMyText = "this is my text";
             t.AddLine(thisIsMyText);
             var zpl = t.GetZpl();
@@ -31,7 +31,7 @@ namespace ZplFlow.Tests
         {
             var t = new Document(new Size(4*203,6*203));
             t.SetDefaultFont('C', heightInDots: 40)
-                .AddLine("John Doe", 100)
+                .AddLine("John Doe", 40)
                 .AddLine("123 Main St.",40);
                 t.AddLine("Town, ST 12345", 40);
                 t.AddLine(string.Empty, 40);
