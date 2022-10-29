@@ -27,5 +27,21 @@ namespace ZplFlow.Tests
             zpl.Should().Contain($"{Codes.FieldData}{thisIsMyText}");
 
         }
+
+        [Fact]
+        public void SamplePackingSlip()
+        {
+            var t = new Document();
+            t.AddLine("John Doe");
+            var zpl = t.GetZpl();
+            var lines = zpl.Split(Environment.NewLine);
+            lines.Should().ContainSingle(s => s.StartsWith(Codes.ScalableBitmappedFont));
+            t.AddLine("123 Main St.");
+                t.AddLine("Town, ST 12345");
+                t.AddLine(string.Empty);
+                t.AddLine("Order #12345");
+            zpl = t.GetZpl();
+            zpl.Should().Contain(Codes.ScalableBitmappedFont);
+        }
     }
 }

@@ -2,6 +2,10 @@
 
 public class Origin : Fragment
 {
+    public Origin()
+    {
+        
+    }
     public enum JustificationEnum
     {
         Left,
