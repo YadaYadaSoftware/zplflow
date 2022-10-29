@@ -10,7 +10,7 @@ public class Document
     private int _y = 0;
     public LinkedList<Fragment> Fragments { get; } = new();
 
-    public Document()
+    protected Document()
     {
         this.Fragments.AddFirst(new FileStart());
         this.Fragments.AddLast(new FileEnd());

@@ -10,7 +10,7 @@ namespace ZplFlow.Tests
         [Fact]
         public void FileStartAndFileEnd()
         {
-            var t = new Document();
+            var t = new Document(new Size(4 * 203, 6 * 203));
             t.GetZpl().Should().StartWith(Codes.FileStart);
             t.GetZpl().ReplaceLineEndings(string.Empty).Should().EndWith(Codes.FileEnd);
         }
@@ -18,7 +18,7 @@ namespace ZplFlow.Tests
         [Fact]
         public void AddTextTest()
         {
-            var t = new Document();
+            var t = new Document(new Size(4 * 203, 6 * 203));
             var thisIsMyText = "this is my text";
             t.AddLine(thisIsMyText);
             var zpl = t.GetZpl();
