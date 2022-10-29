@@ -7,7 +7,7 @@ public class Document
     public StringBuilder Contents { get; } = new();
     private int _x = 0;
     private int _y = 0;
-    private List<Fragment> _fragments = new(){ new FileStart() };
+    public List<Fragment> Fragments { get; } = new() {new FileStart()};
 
     public Document()
     {
@@ -15,27 +15,24 @@ public class Document
     }
 
 
-    public void AddLine(string text)
+    public FieldData AddLine(string text)
     {
-        _fragments.Add(new FieldData(text));
-        //if (!this.Contents.ToString().Contains(Codes.FieldOrigin))
-        //{
-        //    this.Contents.AppendLine($"{Codes.FieldOrigin}{_x},{_y}");
-        //}
-        //this.Contents.Append(Codes.FieldData);
-        //this.Contents.AppendLine(text);
+        var fieldData = new FieldData(text);
+        if (!this.Fragments.Any(fragment => fragment is ScalableBitmappedFont)) this.Fragments.Add(new ScalableBitmappedFont());
+        Fragments.Add(fieldData);
+        return fieldData;
     }
 
     public int Y { get; set; }
 
     public string GetZpl()
     {
-        if (_fragments.Last() is not FileEnd)
+        if (Fragments.Last() is not FileEnd)
         {
-            _fragments.Add(new FileEnd());
+            Fragments.Add(new FileEnd());
         }
         var returnValue = new StringBuilder();
-        foreach (var fragment in _fragments)
+        foreach (var fragment in Fragments)
         {
             if (fragment.SupportsOrigin)
             {

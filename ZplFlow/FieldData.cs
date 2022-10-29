@@ -17,8 +17,5 @@ public class FieldData : Fragment
         zpl.AppendLine($"{Codes.FieldData}{Text}");
         return zpl.ToString();
     }
-
-    
-
 }
 

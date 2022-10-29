@@ -20,6 +20,7 @@ namespace ZplFlow.Tests
             var t = new Document();
             var thisIsMyText = "this is my text";
             t.AddLine(thisIsMyText);
+            t.Fragments.Should().ContainSingle(fragment => fragment is ScalableBitmappedFont);
             var zpl = t.GetZpl();
             zpl.Should().Contain(Codes.ScalableBitmappedFont);
             zpl.Should().Contain($"{Codes.FieldOrigin}0,0");

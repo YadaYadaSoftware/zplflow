@@ -15,9 +15,9 @@ namespace ZplFlow.Tests
         public void AddsFont()
         {
             var t = new FieldData("this is my text");
-            var fragments = new List<Fragment>();
-            
-            var zpl = t.GetZpl(new Document());
+
+            var document = new Document();
+            var zpl = t.GetZpl(document);
             zpl.Should().Contain(Codes.ScalableBitmappedFont);
             zpl.Should().Contain(Codes.FieldData);
         }
