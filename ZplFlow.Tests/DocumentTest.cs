@@ -31,7 +31,7 @@ namespace ZplFlow.Tests
         public void SamplePackingSlip()
         {
             var t = new Document();
-            t.AddLine("John Doe");
+            t.AddLine("John Doe", 40);
             var zpl = t.GetZpl();
             var lines = zpl.Split(Environment.NewLine);
             lines.Should().ContainSingle(s => s.StartsWith(Codes.ScalableBitmappedFont));

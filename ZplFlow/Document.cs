@@ -9,11 +9,15 @@ public class Document
     private int _y = 0;
     public List<Fragment> Fragments { get; } = new() {new FileStart()};
 
- 
-    public Document AddLine(string text)
+
+    public Document AddLine(string text, int heightInDots = 30)
     {
+        if (this.Fragments.LastOrDefault(f => f is ScalableBitmappedFont) is not { })
+        {
+            this.Fragments.Add(new ScalableBitmappedFont { FontHeight = heightInDots });
+        }
+        
         var fieldData = new FieldData(text);
-        if (!this.Fragments.Any(fragment => fragment is ScalableBitmappedFont)) this.Fragments.Add(new ScalableBitmappedFont());
         Fragments.Add(fieldData);
         return this;
     }

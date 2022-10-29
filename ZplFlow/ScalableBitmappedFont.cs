@@ -12,7 +12,7 @@ public interface IScalableBitmappedFont
 
 public class ScalableBitmappedFont : Fragment, IScalableBitmappedFont
 {
-    public ScalableBitmappedFont(string font = "0", int fragmentWidth = 10, int fragmentHeight = 10, Orientation orientation = Orientation.Normal)
+    public ScalableBitmappedFont(string font = "0", int fragmentWidth = 0, int fragmentHeight = 0, Orientation orientation = Orientation.Normal)
     {
         this.Font = font;
         this.FontWidth = fragmentWidth;
