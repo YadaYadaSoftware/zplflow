@@ -17,7 +17,7 @@ namespace ZplFlow.Tests
             const int width = 10;
             const int height = 11;
             var orientation = "N";
-            var t = new ScalableBitmappedFont(font, width, height, orientation);
+            var t = new ScalableBitmappedFont(font, width, height, Orientation.Normal);
             t.GetZpl().Should().Be($"{Codes.ScalableBitmappedFont}{font}{orientation},{height},{width}");
         }
     }
