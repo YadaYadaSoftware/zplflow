@@ -40,7 +40,7 @@ public class Document
             {
                 returnValue.AppendLine($"{Codes.FieldOrigin}{_x},{_y}");
             }
-            returnValue.Append(fragment.GetZpl());
+            returnValue.Append(fragment.GetZpl(new List<Fragment>()));
         }
         return returnValue.ToString();
     }

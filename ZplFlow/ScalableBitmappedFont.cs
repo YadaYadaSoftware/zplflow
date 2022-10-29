@@ -11,9 +11,9 @@ public class ScalableBitmappedFont : Fragment
         this.Height = height;
         this.Orientation = orientation;
     }
-    public override string GetZpl()
+    public override string GetZpl(List<Fragment> fragments)
     {
-        return $"{Codes.ScalableBitmappedFont}{this.Font}{this.Orientation.ToStringFromEnumMember()},{this.Height},{this.Width}";
+        return $"{Codes.ScalableBitmappedFont}{this.Font}{this.Orientation.GetEnumMemberValue()},{this.Height},{this.Width}";
     }
     public string Font { get; }
     public int? Width { get; }
@@ -28,18 +28,4 @@ public enum Orientation
     [EnumMember(Value = "R")] Rotated90,
     [EnumMember(Value = "I")] Rotated180,
     [EnumMember(Value = "B")] Rotated270
-}
-
-public static class EnumHelper
-{
-    public static string ToStringFromEnumMember(this Enum @enum)
-    {
-        return @enum.GetType()
-            .GetMember(@enum.ToString())
-            .First()
-            .GetCustomAttributes(typeof(EnumMemberAttribute), false)
-            .Cast<EnumMemberAttribute>()
-            .First()
-            .Value;
-    }
 }

@@ -10,7 +10,7 @@ public class TextLine : Fragment
     }
 
     public string Text { get; }
-    public override string GetZpl()
+    public override string GetZpl(List<Fragment> fragments)
     {
         var zpl = new StringBuilder();
         zpl.AppendLine($"{Codes.ScalableBitmappedFont}0,0,30");

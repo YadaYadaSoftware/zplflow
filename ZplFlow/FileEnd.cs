@@ -2,7 +2,7 @@
 
 public class FileEnd : Fragment
 {
-    public override string GetZpl()
+    public override string GetZpl(List<Fragment> fragments)
     {
         return Codes.FileEnd;
     }

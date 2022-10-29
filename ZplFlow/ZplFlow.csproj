@@ -9,4 +9,8 @@
 	  <RepositoryUrl>https://github.com/YadaYadaSoftware/zplflow</RepositoryUrl>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="YadaYadaSoftware.System" Version="1.300.142" />
+  </ItemGroup>
+
 </Project>

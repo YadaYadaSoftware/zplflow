@@ -12,7 +12,7 @@ public abstract class Fragment
     {
         
     }
-    public abstract string GetZpl();
+    public abstract string GetZpl(List<Fragment> fragments);
     public bool SupportsOrigin { get; }
     public bool SupportsHeight { get; }
 
