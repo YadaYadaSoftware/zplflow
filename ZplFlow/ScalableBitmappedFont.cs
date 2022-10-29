@@ -11,7 +11,7 @@ public interface IScalableBitmappedFont
     int? FontHeight { get; set; }
 }
 
-public class ScalableBitmappedFont : Fragment, IScalableBitmappedFont
+public record ScalableBitmappedFont : Fragment, IScalableBitmappedFont
 {
     public ScalableBitmappedFont(string font = "M", int fragmentWidth = 10, int fragmentHeight = 10, Orientation orientation = Orientation.Normal)
     {
@@ -28,7 +28,6 @@ public class ScalableBitmappedFont : Fragment, IScalableBitmappedFont
             zpl.AppendLine($"{Codes.CommentStart} --- Set Font: {nameof(Font)}='{this.Font}, {nameof(Orientation)}='{this.Orientation}', {nameof(FontHeight)}='{this.FontHeight}', {nameof(FontWidth)}='{this.FontWidth}' --- {Codes.CommentEnd}");
         }
         zpl.Append($"{Codes.ScalableBitmappedFont}{this.Font}{this.Orientation.GetEnumMemberValue()},{this.FontHeight},{this.FontWidth}");
-        zpl.AppendLine();
         return zpl.ToString();
     }
     public string Font { get; set; }

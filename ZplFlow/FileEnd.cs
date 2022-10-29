@@ -1,6 +1,6 @@
 ﻿namespace YadaYada.ZplFlow;
 
-public class FileEnd : Fragment
+public record FileEnd : Fragment
 {
     public override string GetZpl(Document document, bool withComments)
     {

@@ -21,9 +21,7 @@ namespace ZplFlow.Tests
             var t = new Document();
             var thisIsMyText = "this is my text";
             t.AddLine(thisIsMyText);
-            t.Fragments.Should().ContainSingle(fragment => fragment is ScalableBitmappedFont);
             var zpl = t.GetZpl();
-            zpl.Should().Contain(Codes.ScalableBitmappedFont);
             zpl.Should().Contain($"{Codes.FieldDataStart}{thisIsMyText}");
 
         }
@@ -32,16 +30,13 @@ namespace ZplFlow.Tests
         public void SamplePackingSlip()
         {
             var t = new Document(new Size(4*203,6*203));
-            t.AddLine("John Doe", 100);
-            var zpl = t.GetZpl();
-            var lines = zpl.Split(Environment.NewLine);
-            lines.Should().ContainSingle(s => s.StartsWith(Codes.ScalableBitmappedFont));
-            t.AddLine("123 Main St.",40);
+            t.SetDefaultFont('C', heightInDots: 40)
+                .AddLine("John Doe", 100)
+                .AddLine("123 Main St.",40);
                 t.AddLine("Town, ST 12345", 40);
                 t.AddLine(string.Empty, 40);
                 t.AddLine("Order #12345", 40);
-            zpl = t.GetZpl(true);
-            zpl.Should().Contain(Codes.ScalableBitmappedFont);
+            var zpl = t.GetZpl(true);
             File.WriteAllText("c:\\temp\\test.zpl", zpl);
 
             /*

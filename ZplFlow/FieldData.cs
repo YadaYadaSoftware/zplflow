@@ -2,7 +2,7 @@
 
 namespace YadaYada.ZplFlow;
 
-public class FieldData : Fragment
+public record FieldData : Fragment
 {
     public FieldData(string text) : base(true)
     {

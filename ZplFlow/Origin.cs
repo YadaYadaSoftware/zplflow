@@ -2,7 +2,7 @@
 
 namespace YadaYada.ZplFlow;
 
-public class Origin : Fragment
+public record Origin : Fragment
 {
     public Origin()
     {
@@ -33,7 +33,7 @@ public class Origin : Fragment
         {
             zpl.AppendLine($"{Codes.CommentStart} --- Origin {nameof(X)}='{X}', {nameof(Y)}='{Y}', {nameof(Justification)}='{Justification}' --- {Codes.CommentEnd}");
         }
-        zpl.AppendLine($"{Codes.FieldOrigin}{X},{Y},{(int)Justification}");
+        zpl.Append($"{Codes.FieldOrigin}{X},{Y},{(int)Justification}");
         return zpl.ToString();
 
     }

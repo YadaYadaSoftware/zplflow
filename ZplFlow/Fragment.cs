@@ -1,6 +1,6 @@
 ﻿namespace YadaYada.ZplFlow;
 
-public abstract class Fragment
+public abstract record Fragment
 {
     protected Fragment(bool supportsOrigin = false)
     {

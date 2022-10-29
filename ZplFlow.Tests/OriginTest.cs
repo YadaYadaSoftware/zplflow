@@ -15,6 +15,6 @@ public class OriginTest
         t.Y = y;
         t.Justification = Origin.JustificationEnum.Right;
         var zpl = t.GetZpl(new Document());
-        zpl.Should().Be($"{Codes.FieldOrigin}{x},{y},{t.Justification}");
+        zpl.Should().Be($"{Codes.FieldOrigin}{x},{y},{(int)t.Justification}");
     }
 }

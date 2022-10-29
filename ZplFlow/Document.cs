@@ -16,7 +16,7 @@ public class Document
         this.Fragments.AddLast(new FileEnd());
     }
 
-    public Document(Size size)
+    public Document(Size size) : this()
     {
         Size = size;
     }
@@ -39,14 +39,30 @@ public class Document
 
         this.AddBeforeFileEnd(origin);
 
-        if (this.Fragments.OfType<ScalableBitmappedFont>().LastOrDefault() is not { } lastFont || lastFont.FontHeight != heightInDots)
-        {
-            this.AddBeforeFileEnd(new ScalableBitmappedFont { FontHeight = heightInDots });
-        }
+        //if (this.Fragments.OfType<ScalableBitmappedFont>().LastOrDefault() is not { } lastFont || lastFont.FontHeight != heightInDots)
+        //{
+        //    this.AddBeforeFileEnd(new ScalableBitmappedFont { FontHeight = heightInDots });
+        //}
         
         var fieldData = new FieldData(text){FragmentHeight = heightInDots};
         this.AddBeforeFileEnd(fieldData);
         return this;
+    }
+
+    public Document SetDefaultFont(char? font = null, int? widthInDots = null, int? heightInDots = null)
+    {
+        var defaultFont = new DefaultFont(font, widthInDots, heightInDots);
+        if (defaultFont != this.GetCurrentFont())
+        {
+            this.AddBeforeFileEnd(defaultFont);
+        }
+
+        return this;
+    }
+
+    private DefaultFont? GetCurrentFont()
+    {
+        return this.Fragments.OfType<DefaultFont>().LastOrDefault();
     }
 
     public string GetZpl(bool withComments = false)
