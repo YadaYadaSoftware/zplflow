@@ -22,3 +22,11 @@ public record FieldData : Fragment
     }
 
 }
+
+public record QrCode : Fragment
+{
+    public override string GetZpl(Document document)
+    {
+        throw new NotImplementedException();
+    }
+}

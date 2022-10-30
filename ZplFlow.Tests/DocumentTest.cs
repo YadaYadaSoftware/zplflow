@@ -36,7 +36,6 @@ namespace ZplFlow.Tests
                 t.AddLine("Town, ST 12345", 40);
                 t.AddLine(string.Empty, 40);
                 t.AddLine("Order #12345", 40);
-            var zpl = t.GetZpl();
             t.Save(new FileInfo(Path.GetTempPath() + "test.zpl"));
         }
     }
