@@ -15,6 +15,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Set Version
+      run: echo "V=1.$(date +%j).${{ github.run_number }}" >> $GITHUB_ENV
+    - name: Echo Version
+      run: echo "V=$V"
     - uses: actions/checkout@v3
     - uses: actions/setup-dotnet@v2
       name: Install Dotnet & Setup Nuget
@@ -29,3 +33,7 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Publish NuGet
+      run: dotnet pack --no-build -p:PackageVersion=$V --include-source
+    - name: Publish Package To GitHub
+      run: dotnet nuget push **/*.symbols.nupkg --api-key ${{ secrets.PAT }} --source https://nuget.pkg.github.com/yadayadasoftware/index.json
