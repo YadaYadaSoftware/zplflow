@@ -36,24 +36,8 @@ namespace ZplFlow.Tests
                 t.AddLine("Town, ST 12345", 40);
                 t.AddLine(string.Empty, 40);
                 t.AddLine("Order #12345", 40);
-            var zpl = t.GetZpl(true);
-            File.WriteAllText("c:\\temp\\test.zpl", zpl);
-
-            /*
-
-^XA
-^FO0,0,0
-^ABN0,100
-^FDJohn Doe^FS
-^FO10,150,0
-^ABN0,50
-^FD123 Main St.^FS
-^XZ
-            
-            
-             */
-
-
+            var zpl = t.GetZpl();
+            t.Save(new FileInfo(Path.GetTempPath() + "test.zpl"));
         }
     }
 }

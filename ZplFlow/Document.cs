@@ -71,7 +71,7 @@ public class Document
         return this.Fragments.OfType<DefaultFont>().LastOrDefault();
     }
 
-    public string GetZpl(bool withComments = false)
+    public string GetZpl()
     {
         var returnValue = new StringBuilder();
         foreach (var fragment in Fragments)
@@ -79,5 +79,10 @@ public class Document
             returnValue.AppendLine(fragment.GetZpl(this));
         }
         return returnValue.ToString();
+    }
+
+    public void Save(FileInfo fileInfo)
+    {
+        File.WriteAllText(fileInfo.FullName, this.GetZpl());
     }
 }
