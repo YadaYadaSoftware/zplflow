@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +18,7 @@ namespace ZplFlow.Tests
             const int height = 11;
             var orientation = "N";
             var t = new ScalableBitmappedFont(font, Orientation.Normal, width, height);
-            var zpl = t.GetZpl(new Document(new Size(4 * 203, 6 * 203)));
+            var zpl = t.GetZpl();
             zpl.Should().Be($"{Codes.ScalableBitmappedFont}{font}{orientation},{height},{width}");
         }
     }

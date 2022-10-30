@@ -20,7 +20,7 @@ public record ScalableBitmappedFont : Fragment, IScalableBitmappedFont
         FontWidth = FragmentWidth = fragmentWidth;
         FontHeight = FragmentHeight = fragmentHeight;
     }
-    public override string GetZpl(Document document)
+    public override string GetZpl()
     {
         var zpl = new StringBuilder();
         zpl.Append($"{Codes.ScalableBitmappedFont}{this.Font}{this.Orientation.GetEnumMemberValue()},");

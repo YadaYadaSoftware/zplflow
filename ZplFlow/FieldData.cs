@@ -4,17 +4,9 @@ namespace YadaYada.ZplFlow;
 
 public record FieldData : Fragment
 {
-    public FieldData(string text) : base(true)
-    {
-        this.Text = text;
-    }
+    public string? Text { get; set; }
 
-
-
-
-    public string Text { get; }
-
-    public override string GetZpl(Document document)
+    public override string GetZpl()
     {
         var zpl = new StringBuilder();
         zpl.Append($"{Codes.FieldDataStart}{Text}{Codes.FieldDataEnd}");
@@ -25,7 +17,7 @@ public record FieldData : Fragment
 
 public record QrCode : Fragment
 {
-    public override string GetZpl(Document document)
+    public override string GetZpl()
     {
         throw new NotImplementedException();
     }

@@ -8,7 +8,7 @@ public record DefaultFont(char? Font = null, int? WidthInDots = null, int? Heigh
     public int? WidthInDots { get; set; } = WidthInDots;
     public int? HeightInDots { get; set; } = HeightInDots;
 
-    public override string GetZpl(Document document)
+    public override string GetZpl()
     {
         var zpl = new StringBuilder();
 

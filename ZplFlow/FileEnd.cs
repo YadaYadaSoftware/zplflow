@@ -2,7 +2,7 @@
 
 public record FileEnd : Fragment
 {
-    public override string GetZpl(Document document)
+    public override string GetZpl()
     {
         return Codes.FileEnd;
     }

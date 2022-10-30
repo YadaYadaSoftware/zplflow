@@ -12,7 +12,7 @@ public class DefaultFontTest
     {
         var target = new DefaultFont('C', 10, 11);
         var document = new Document(new Size(4 * 203, 6 * 203));
-        var zpl = target.GetZpl(document);
+        var zpl = target.GetZpl();
         zpl.Should().Be($"{Codes.DefaultFont}C,11,10");
     }
 }
