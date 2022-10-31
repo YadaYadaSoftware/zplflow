@@ -37,19 +37,6 @@ public class Document
     public Document AddLine(string text, int heightInDots = 30)
     {
 
-        //var origin = new Origin(this.Padding, Y, Origin.JustificationEnum.Left);
-
-        //this.AddBeforeFileEnd(origin);
-
-        if (this.Fragments.OfType<ScalableBitmappedFont>().LastOrDefault() is not { } lastFont || lastFont.FontHeight != heightInDots)
-        {
-            var currentFont = this.GetCurrentFont();
-            if (currentFont?.Font != null)
-            {
-                this.AddBeforeFileEnd(new ScalableBitmappedFont(currentFont.Font.Value, Orientation.Normal, fontHeight: heightInDots));
-            }
-        }
-
         var fieldData = new FieldData{Text = text};
         this.AddBeforeFileEnd(fieldData);
         return this;
@@ -112,12 +99,8 @@ public record TextFragment : Fragment
     public FontBase Font { get; set; }
     public override string GetZpl()
     {
-        
-        var fontCommand = new ScalableBitmappedFont(this.Font.Code, Orientation.Normal, 10,10);
-        var fieldData = new FieldData { Text = this.Text };
-        var zpl = new StringBuilder();
-        zpl.AppendLine(fontCommand.GetZpl());
-        zpl.Append(fieldData.GetZpl());
-        return zpl.ToString();
+
+        return $"{Codes.ScalableBitmappedFont}{this.Font.Code}{Codes.FieldDataStart}{this.Text}{Codes.FieldDataEnd}";
+
     }
 }
