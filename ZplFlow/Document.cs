@@ -6,6 +6,7 @@ namespace YadaYada.ZplFlow;
 
 public class Document
 {
+    private readonly int _padding;
     public Size Size { get; }
     public int Y { get; private set; } = 0;
     public LinkedList<Fragment> Fragments { get; } = new();
@@ -18,6 +19,7 @@ public class Document
 
     public Document(Size size, int padding = 20 ) : this()
     {
+        _padding = padding;
         Size = size;
         this.AddBeforeFileEnd(new LabelHome(padding,padding));
     }
@@ -41,9 +43,16 @@ public class Document
 
     public Document AddText(FontBase font, string text)
     {
-        this.AddBeforeFileEnd(new TextFragment(font, text));
+        this.AddBeforeFileEnd(new TextLine(font, text));
         return this;
     }
+    public Document AddTextBlock(FontBase font, string text, int maxLines)
+    {
+        this.AddBeforeFileEnd(new TextBlock(font, text, this.Size.Width - _padding, maxLines));
+        return this;
+    }
+
+
 
     public Document AddQrCode(string data)
     {

@@ -13,4 +13,5 @@ public static class Codes
     public const string DefaultFont = "^CF";
     public const string QrCode = "^BQ";
     public const string LabelHome = "^LH";
+    public const string FieldBlockStart = "^FB";
 }
