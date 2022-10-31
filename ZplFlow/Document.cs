@@ -55,6 +55,12 @@ public class Document
         return this;
     }
 
+    public Document AddQrCode(string data)
+    {
+        this.AddBeforeFileEnd(new QrCode(data));
+        return this;
+    }
+
     public Document SetDefaultFont(char? font = null, int? widthInDots = null, int? heightInDots = null)
     {
         var defaultFont = new DefaultFont(font, widthInDots, heightInDots);
