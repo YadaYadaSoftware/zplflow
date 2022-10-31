@@ -7,7 +7,7 @@ namespace YadaYada.ZplFlow;
 public class Document
 {
     public Size Size { get; }
-    public decimal Y { get; private set; } = 0;
+    public int Y { get; private set; } = 0;
     public LinkedList<Fragment> Fragments { get; } = new();
 
     protected Document()
@@ -25,10 +25,7 @@ public class Document
 
     private Fragment AddBeforeFileEnd(Fragment fragment)
     {
-        //if (fragment.FragmentHeight.HasValue)
-        //{
-        //    Y += fragment.FragmentHeight.Value;
-        //}
+        this.Fragments.AddBefore(this.Fragments.Last!, new Origin(0, this.Y, Origin.JustificationEnum.Auto));
         this.Y += fragment.Height;
         this.Fragments.AddBefore(this.Fragments.Last!, new LinkedListNode<Fragment>(fragment));
         return fragment;
@@ -83,24 +80,5 @@ public class Document
     public void Save(FileInfo fileInfo)
     {
         File.WriteAllText(fileInfo.FullName, this.GetZpl());
-    }
-}
-
-public record TextFragment : Fragment
-{
-    public TextFragment(FontBase font, string text) : base(font.HeightInDots)
-    {
-        this.Font = font;
-        this.Text = text;
-    }
-
-    public string Text { get; set; }
-
-    public FontBase Font { get; set; }
-    public override string GetZpl()
-    {
-
-        return $"{Codes.ScalableBitmappedFont}{this.Font.Code}{Codes.FieldDataStart}{this.Text}{Codes.FieldDataEnd}";
-
     }
 }
