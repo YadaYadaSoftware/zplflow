@@ -12,4 +12,5 @@ public static class Codes
     public const string CommentEnd = "^FS";
     public const string DefaultFont = "^CF";
     public const string QrCode = "^BQ";
+    public const string LabelHome = "^LH";
 }

@@ -7,8 +7,7 @@ namespace YadaYada.ZplFlow;
 public class Document
 {
     public Size Size { get; }
-    public int Padding { get; }
-    private int _y = 0;
+    public decimal Y { get; private set; } = 0;
     public LinkedList<Fragment> Fragments { get; } = new();
 
     protected Document()
@@ -20,7 +19,7 @@ public class Document
     public Document(Size size, int padding = 20 ) : this()
     {
         Size = size;
-        Padding = padding;
+        this.AddBeforeFileEnd(new LabelHome(padding,padding));
     }
 
 
@@ -28,7 +27,7 @@ public class Document
     {
         if (fragment.FragmentHeight.HasValue)
         {
-            _y += fragment.FragmentHeight.Value;
+            Y += fragment.FragmentHeight.Value;
         }
         this.Fragments.AddBefore(this.Fragments.Last!, new LinkedListNode<Fragment>(fragment));
         return fragment;
@@ -37,9 +36,9 @@ public class Document
     public Document AddLine(string text, int heightInDots = 30)
     {
 
-        var origin = new Origin(this.Padding, _y, Origin.JustificationEnum.Left);
+        //var origin = new Origin(this.Padding, Y, Origin.JustificationEnum.Left);
 
-        this.AddBeforeFileEnd(origin);
+        //this.AddBeforeFileEnd(origin);
 
         if (this.Fragments.OfType<ScalableBitmappedFont>().LastOrDefault() is not { } lastFont || lastFont.FontHeight != heightInDots)
         {
@@ -52,6 +51,13 @@ public class Document
 
         var fieldData = new FieldData{FragmentHeight = heightInDots, Text = text};
         this.AddBeforeFileEnd(fieldData);
+        return this;
+    }
+
+    public Document AddText(FontBase font, string text)
+    {
+        this.AddBeforeFileEnd(new ScalableBitmappedFont(font.Code, Orientation.Normal));
+        this.AddBeforeFileEnd(new FieldData { Text = text });
         return this;
     }
 

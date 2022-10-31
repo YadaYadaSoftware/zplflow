@@ -38,5 +38,17 @@ namespace ZplFlow.Tests
                 t.AddLine("Order #12345", 40);
             t.Save(new FileInfo(Path.GetTempPath() + "test.zpl"));
         }
+
+        [Fact]
+        public void SamplePackingSlip2()
+        {
+            var t = new Document(new Size(4 * 203, 6 * 203));
+            t.AddText(FontBase.Arial4, "This is my text");
+            
+            t.Save(new FileInfo(Path.GetTempPath() + "test.zpl"));
+            var zpl = t.GetZpl();
+            zpl.Should().Contain(Codes.LabelHome);
+            zpl.Should().Contain($"{Codes.FieldDataStart}This is my text");
+        }
     }
 }
