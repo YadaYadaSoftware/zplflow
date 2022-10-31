@@ -5,6 +5,10 @@ namespace YadaYada.ZplFlow;
 
 public record FieldData : Fragment
 {
+    public FieldData():base(0)
+    {
+        
+    }
     public string? Text { get; set; }
 
     public override string GetZpl()
@@ -22,7 +26,7 @@ public record QrCode : Fragment
     private const string OrientationNormal = "N";
     private const string ModelEnhanced = "2";
 
-    public QrCode(string data)
+    public QrCode(string data) : base(0)
     {
         if (string.IsNullOrEmpty(data)) throw new ArgumentException("Value cannot be null or empty.", nameof(data));
         Data = data;

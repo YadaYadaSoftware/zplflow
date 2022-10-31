@@ -2,7 +2,7 @@
 
 public class Arial7 : FontBase
 {
-    public Arial7() : base('V', .394m, 0.349m)
+    public Arial7() : base('V',80,71)
     {
     }
 }

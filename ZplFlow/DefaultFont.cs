@@ -2,7 +2,7 @@
 
 namespace YadaYada.ZplFlow;
 
-public record DefaultFont(char? Font = null, int? WidthInDots = null, int? HeightInDots = null) : Fragment
+public record DefaultFont(char? Font = null, int? WidthInDots = null, int? HeightInDots = null) : Fragment(0)
 {
     public char? Font { get; set; } = Font;
     public int? WidthInDots { get; set; } = WidthInDots;

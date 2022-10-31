@@ -2,7 +2,7 @@
 
 public record LabelHome : Fragment
 {
-    public LabelHome(int x, int y)
+    public LabelHome(int x, int y):base(y)
     {
         X = x;
         Y = y;

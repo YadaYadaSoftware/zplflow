@@ -4,12 +4,12 @@ namespace YadaYada.ZplFlow;
 
 public record Origin : Fragment
 {
-    public Origin()
+    public Origin():base(0)
     {
-        
+
     }
 
-    public Origin(int x, int y, JustificationEnum justification)
+    public Origin(int x, int y, JustificationEnum justification):this()
     {
         X = x;
         Y = y;

@@ -43,8 +43,10 @@ namespace ZplFlow.Tests
         public void SamplePackingSlip2()
         {
             var t = new Document(new Size(4 * 203, 6 * 203));
+            t.Y.Should().Be(20);
             t.AddText(FontBase.Arial4, "This is my text");
-            
+            t.Y.Should().Be(20 + FontBase.Arial4.HeightInDots);
+
             t.Save(new FileInfo(Path.GetTempPath() + "test.zpl"));
             var zpl = t.GetZpl();
             zpl.Should().Contain(Codes.LabelHome);

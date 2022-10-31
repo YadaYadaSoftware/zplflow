@@ -5,7 +5,7 @@ namespace YadaYada.ZplFlow;
 
 public interface IScalableBitmappedFont
 {
-    char Font { get; set; }
+    char FontCode { get; set; }
     int? FontWidth { get; set; }
     Orientation Orientation { get; set; }
     int? FontHeight { get; set; }
@@ -13,30 +13,20 @@ public interface IScalableBitmappedFont
 
 public record ScalableBitmappedFont : Fragment, IScalableBitmappedFont
 {
-    public ScalableBitmappedFont(char font, Orientation orientation, int? fragmentWidth = null, int? fragmentHeight = null)
+    public ScalableBitmappedFont(char fontCode, Orientation orientation, int fontWidth , int fontHeight):base(0)
     {
-        Font = font;
+        FontCode = fontCode;
         Orientation = orientation;
-        FontWidth = FragmentWidth = fragmentWidth;
-        FontHeight = FragmentHeight = fragmentHeight;
+        FontWidth = fontWidth;
+        FontHeight = fontHeight;
     }
     public override string GetZpl()
     {
         var zpl = new StringBuilder();
-        zpl.Append($"{Codes.ScalableBitmappedFont}{this.Font}{this.Orientation.GetEnumMemberValue()},");
-        if (this.FontHeight.HasValue)
-        {
-            zpl.Append(this.FontHeight.Value);
-        }
-        zpl.Append(",");
-        if (this.FontWidth.HasValue)
-        {
-            zpl.Append(this.FontWidth.Value);
-        }
-        
+        zpl.Append($"{Codes.ScalableBitmappedFont}{this.FontCode}{this.Orientation.GetEnumMemberValue()},{this.FontHeight},{this.FontWidth}");
         return zpl.ToString();
     }
-    public char Font { get; set; }
+    public char FontCode { get; set; }
     public int? FontWidth { get; set; }
     public Orientation Orientation { get; set; }
     public int? FontHeight { get; set; }

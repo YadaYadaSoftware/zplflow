@@ -25,10 +25,11 @@ public class Document
 
     private Fragment AddBeforeFileEnd(Fragment fragment)
     {
-        if (fragment.FragmentHeight.HasValue)
-        {
-            Y += fragment.FragmentHeight.Value;
-        }
+        //if (fragment.FragmentHeight.HasValue)
+        //{
+        //    Y += fragment.FragmentHeight.Value;
+        //}
+        this.Y += fragment.Height;
         this.Fragments.AddBefore(this.Fragments.Last!, new LinkedListNode<Fragment>(fragment));
         return fragment;
     }
@@ -45,19 +46,18 @@ public class Document
             var currentFont = this.GetCurrentFont();
             if (currentFont?.Font != null)
             {
-                this.AddBeforeFileEnd(new ScalableBitmappedFont(currentFont.Font.Value, Orientation.Normal, fragmentHeight: heightInDots));
+                this.AddBeforeFileEnd(new ScalableBitmappedFont(currentFont.Font.Value, Orientation.Normal, fontHeight: heightInDots));
             }
         }
 
-        var fieldData = new FieldData{FragmentHeight = heightInDots, Text = text};
+        var fieldData = new FieldData{Text = text};
         this.AddBeforeFileEnd(fieldData);
         return this;
     }
 
     public Document AddText(FontBase font, string text)
     {
-        this.AddBeforeFileEnd(new ScalableBitmappedFont(font.Code, Orientation.Normal));
-        this.AddBeforeFileEnd(new FieldData { Text = text });
+        this.AddBeforeFileEnd(new TextFragment(font, text));
         return this;
     }
 
@@ -96,5 +96,28 @@ public class Document
     public void Save(FileInfo fileInfo)
     {
         File.WriteAllText(fileInfo.FullName, this.GetZpl());
+    }
+}
+
+public record TextFragment : Fragment
+{
+    public TextFragment(FontBase font, string text) : base(font.HeightInDots)
+    {
+        this.Font = font;
+        this.Text = text;
+    }
+
+    public string Text { get; set; }
+
+    public FontBase Font { get; set; }
+    public override string GetZpl()
+    {
+        
+        var fontCommand = new ScalableBitmappedFont(this.Font.Code, Orientation.Normal, 10,10);
+        var fieldData = new FieldData { Text = this.Text };
+        var zpl = new StringBuilder();
+        zpl.AppendLine(fontCommand.GetZpl());
+        zpl.Append(fieldData.GetZpl());
+        return zpl.ToString();
     }
 }

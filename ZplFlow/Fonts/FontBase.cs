@@ -1,4 +1,6 @@
-﻿namespace YadaYada.ZplFlow;
+﻿using YadaYada.ZplFlow.Fonts;
+
+namespace YadaYada.ZplFlow;
 
 public abstract class FontBase
 {
@@ -10,14 +12,14 @@ public abstract class FontBase
     public static FontBase Arial6 = new Arial6();
     public static FontBase Arial7 = new Arial7();
     
-    protected FontBase(char code, decimal heightInInches, decimal widthInInches)
+    protected FontBase(char code, int heightInDots, decimal widthInDots)
     {
         Code = code;
-        HeightInInches = heightInInches;
-        WidthInInches = widthInInches;
+        HeightInDots = heightInDots;
+        WidthInDots = widthInDots;
     }
 
-    public decimal WidthInInches { get; }
     public char Code { get; }
-    public decimal HeightInInches { get; }
+    public int HeightInDots { get; }
+    public decimal WidthInDots { get; }
 }
