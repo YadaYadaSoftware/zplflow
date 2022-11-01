@@ -14,4 +14,5 @@ public static class Codes
     public const string QrCode = "^BQ";
     public const string LabelHome = "^LH";
     public const string FieldBlockStart = "^FB";
+    public const string TextBlockStart = "^TB";
 }

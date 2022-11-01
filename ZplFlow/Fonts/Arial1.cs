@@ -6,3 +6,11 @@ public class Arial1 : FontBase
     {
     }
 }
+
+public class OCRB : FontBase
+{
+    public OCRB():base('E',28,15 + 5)
+    {
+        
+    }
+}

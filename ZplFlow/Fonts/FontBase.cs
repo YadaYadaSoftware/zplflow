@@ -11,7 +11,7 @@ public abstract class FontBase
     public static FontBase Arial5 = new Arial5();
     public static FontBase Arial6 = new Arial6();
     public static FontBase Arial7 = new Arial7();
-    
+
     protected FontBase(char code, int heightInDots, decimal widthInDots)
     {
         Code = code;
@@ -22,4 +22,10 @@ public abstract class FontBase
     public char Code { get; }
     public int HeightInDots { get; }
     public decimal WidthInDots { get; }
+
+    public int GetCharactersPerLine(int lineWidth)
+    {
+        var returnValue = (int) Math.Floor(lineWidth / this.WidthInDots);
+        return returnValue;
+    }
 }

@@ -9,7 +9,7 @@ public class TextFragmentTest
     [Fact]
     public void GetZplTest()
     {
-        var t = new TextLine(FontBase.Arial1, "Hello World", new Document(new Size(100, 100)));
-        t.Height.Should().Be(40);
+        var t = new TextLine(FontBase.Arial1, "Hello World");
+        t.Height.Should().Be(20);
     }
 }

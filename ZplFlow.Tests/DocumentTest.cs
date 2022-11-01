@@ -2,6 +2,7 @@
 using System.Drawing;
 using FluentAssertions;
 using YadaYada.ZplFlow;
+using YadaYada.ZplFlow.Fonts;
 
 namespace ZplFlow.Tests
 {
@@ -46,6 +47,7 @@ namespace ZplFlow.Tests
             t.Y.Should().Be(20);
             t.AddText(FontBase.Arial4, "This is my text");
             t.Y.Should().Be(20 + FontBase.Arial4.HeightInDots);
+            t.AddTextBlock(new OCRB(), "this is a long piece of text.  this is a long piece of text.  this is a long piece of text.  this is a long piece of text.  this is a long piece of text.  this is a long piece of text.  ", 120);
 
             t.Save(new FileInfo(Path.GetTempPath() + "test.zpl"));
             var zpl = t.GetZpl();

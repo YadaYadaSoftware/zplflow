@@ -18,24 +18,3 @@ public record TextLine : Fragment
 
     }
 }
-
-public record TextBlock : Fragment
-{
-    public FontBase Font { get; }
-    public string Text { get; }
-    public int MaxLines { get; }
-    public int Width { get; }
-
-    public TextBlock(FontBase font, string text, int width, int maxLines) : base((int)(Math.Ceiling(text.Length / (width / font.WidthInDots)) * font.HeightInDots))
-    {
-        Font = font;
-        Text = text;
-        MaxLines = maxLines;
-        Width = width;
-    }
-
-    public override string GetZpl()
-    {
-        return $"{Codes.ScalableBitmappedFont}{this.Font.Code}{Codes.FieldBlockStart}{this.Width},{this.MaxLines}{Codes.FieldDataStart}{this.Text}{Codes.FieldDataEnd}";
-    }
-}

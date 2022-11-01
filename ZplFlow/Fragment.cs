@@ -2,7 +2,7 @@
 
 public abstract record Fragment
 {
-    public int Height { get; }
+    public int Height { get; protected set; }
 
     protected Fragment(int height)
     {
