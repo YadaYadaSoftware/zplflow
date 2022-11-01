@@ -27,6 +27,12 @@ public class Document
 
     private Fragment AddBeforeFileEnd(Fragment fragment)
     {
+        if (this.Y + fragment.Height > this.Size.Height)
+        {
+            this.Fragments.AddAfter(this.Fragments.Last!, new FileStart());
+            this.Fragments.AddAfter(this.Fragments.Last!, new FileEnd());
+            this.Y = _padding;
+        }
         this.Fragments.AddBefore(this.Fragments.Last!, new Origin(0, this.Y, Origin.JustificationEnum.Auto));
         this.Y += fragment.Height;
         this.Fragments.AddBefore(this.Fragments.Last!, new LinkedListNode<Fragment>(fragment));

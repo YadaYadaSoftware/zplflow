@@ -54,5 +54,23 @@ namespace ZplFlow.Tests
             zpl.Should().Contain(Codes.LabelHome);
             zpl.Should().Contain($"{Codes.FieldDataStart}This is my text");
         }
+
+        [Fact]
+        public void SampleOverflow()
+        {
+            var t = new Document(new Size(4 * 203, 6 * 203));
+
+            for (int page = 1; page < 3; page++)
+            {
+                for (int i = 1; i <= 9; i++)
+                {
+                        t.AddTextBlock(new OCRB(), $"this is a long piece of text #{i} on page #{page}.  this is a long piece of text.  this is a long piece of text.  this is a long piece of text.  this is a long piece of text.  this is a long piece of text.  ", 120);
+                }
+            }
+            t.Save(new FileInfo(Path.GetTempPath() + "test.zpl"));
+
+            t.Y.Should().Be(620);
+
+        }
     }
 }
