@@ -58,6 +58,12 @@ public class Document
         return this;
     }
 
+    public Document AddHorizontalRule(int thickness = 5)
+    {
+        this.AddBeforeFileEnd(new GraphicBox(this.Size.Width - _padding, thickness));
+        return this;
+    }
+
 
 
     public Document AddQrCode(string data)

@@ -72,5 +72,25 @@ namespace ZplFlow.Tests
             t.Y.Should().Be(620);
 
         }
+
+        [Fact]
+        public void QrCodeTest()
+        {
+            var t = new Document(new Size(4 * 203, 6 * 203));
+            t.AddQrCode(Guid.NewGuid().ToString());
+            t.Save(new FileInfo(Path.GetTempPath() + "test.zpl"));
+        }
+
+        [Fact]
+        public void HorizontalRuleTest()
+        {
+            var t = new Document(new Size(4 * 203, 6 * 203));
+            t.AddText(FontBase.Arial4, "Before Rule")
+                .AddHorizontalRule(5)
+                .AddText(FontBase.Arial4, "After Rule");
+            ;
+            t.Save(new FileInfo(Path.GetTempPath() + "test.zpl"));
+
+        }
     }
 }

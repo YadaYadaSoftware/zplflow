@@ -15,4 +15,5 @@ public static class Codes
     public const string LabelHome = "^LH";
     public const string FieldBlockStart = "^FB";
     public const string TextBlockStart = "^TB";
+    public const string GraphicBox = "^GB";
 }
