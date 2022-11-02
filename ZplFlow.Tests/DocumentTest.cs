@@ -69,7 +69,7 @@ namespace ZplFlow.Tests
             }
             t.Save(new FileInfo(Path.GetTempPath() + "test.zpl"));
 
-            t.Y.Should().Be(620);
+            t.Y.Should().Be(1100);
 
         }
 
