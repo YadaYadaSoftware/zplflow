@@ -6,7 +6,7 @@ public record TextBlock : Fragment
     public string Text { get; }
     public int BlockWidth { get; }
 
-    public TextBlock(FontBase font, string text, int blockWidth, int blockHeight) : base((int)(Math.Ceiling(text.Length / (blockWidth / font.WidthInDots)) * font.HeightInDots))
+    public TextBlock(FontBase font, string text, int blockWidth, int blockHeight) : base(blockHeight)
     {
         Font = font;
         Text = text;

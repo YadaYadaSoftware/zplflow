@@ -52,9 +52,9 @@ public class Document
         this.AddBeforeFileEnd(new TextLine(font, text));
         return this;
     }
-    public Document AddTextBlock(FontBase font, string text, int maxLines)
+    public Document AddTextBlock(FontBase font, string text, int heightInDots)
     {
-        this.AddBeforeFileEnd(new TextBlock(font, text, this.Size.Width - _padding, maxLines));
+        this.AddBeforeFileEnd(new TextBlock(font, text, this.Size.Width - _padding, heightInDots));
         return this;
     }
 
