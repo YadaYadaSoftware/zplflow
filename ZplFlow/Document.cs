@@ -57,6 +57,11 @@ public class Document
         this.AddBeforeFileEnd(new TextBlock(font, text, this.Size.Width - _padding, heightInDots));
         return this;
     }
+    public Document AddFieldBlock(FontBase font, string text, int numberOfLines)
+    {
+        this.AddBeforeFileEnd(new FieldBlock(font, text, this.Size.Width - _padding, numberOfLines));
+        return this;
+    }
 
     public Document AddHorizontalRule(int thickness = 5)
     {
